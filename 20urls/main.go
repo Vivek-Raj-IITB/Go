@@ -12,12 +12,13 @@ func main() {
 	fmt.Println(myurl)
 
 	result, _ := url.Parse(myurl)
+	fmt.Println("jhbdhb", result)
 
-	fmt.Println(result.Scheme)
-	fmt.Println(result.Host)
-	fmt.Println(result.Path)
-	fmt.Println(result.Port())
-	fmt.Println(result.RawQuery)
+	fmt.Println("Scheme ", result.Scheme)
+	fmt.Println("Host ", result.Host)
+	fmt.Println("Path ", result.Path)
+	fmt.Println("Port ", result.Port())
+	fmt.Println("Query ", result.RawQuery)
 
 	qparams := result.Query()
 
@@ -29,10 +30,11 @@ func main() {
 	}
 
 	partsOfUrl := &url.URL{
-		Scheme:  "https",
-		Host:    "lco.dev",
-		Path:    "/tutcss",
-		RawPath: "user/sanket",
+		Scheme:   "https",
+		Host:     "lco.dev",
+		Path:     "/tutcss",
+		RawPath:  "user/sanket",
+		RawQuery: "coursename=reactjs&paymentid=dskjnskj",
 	}
 	fmt.Println(partsOfUrl.String())
 }
