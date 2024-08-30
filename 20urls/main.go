@@ -37,4 +37,5 @@ func main() {
 		RawQuery: "coursename=reactjs&paymentid=dskjnskj",
 	}
 	fmt.Println(partsOfUrl.String())
+	fmt.Println(partsOfUrl)
 }
