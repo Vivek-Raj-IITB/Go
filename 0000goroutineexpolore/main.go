@@ -1,27 +1,25 @@
 package main
 
-import "fmt"
-
-func sum(s []int, c chan int) {
-	sum := 0
-	for _, v := range s {
-		sum += v
-	}
-	c <- sum // send sum to c
-}
+import (
+	"fmt"
+)
 
 func main() {
-	s := []int{7, 2, 8, -9, 4, 0}
-
-	c := make(chan int)
-	go sum(s[:len(s)/2], c)
-	go sum(s[len(s)/2:], c)
-	x := <-c
-	y := <-c
-	go sum(s[:len(s)/2], c)
-	z := <-c
-
-	fmt.Println("x ", x)
-	fmt.Println("y ", y)
-	fmt.Println("z ", z)
+	v := 42
+	switch {
+	case v == 42:
+		fmt.Println(42)
+		fallthrough
+	case v < 100:
+		fmt.Println(100)
+		fallthrough
+	case v > 4777:
+		fmt.Println(426666)
+		fallthrough
+	case v == 43:
+		fmt.Println(43)
+		fallthrough
+	default:
+		fmt.Println("default")
+	}
 }

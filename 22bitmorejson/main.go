@@ -5,12 +5,11 @@ import (
 	"fmt"
 )
 
+type ErrorResponse struct {
+}
 type course struct {
-	Name     string `json:"coursename"`
-	Price    int
-	Platform string   `json:"website"`
-	Password string   `json:"-"`
-	Tags     []string `json:"tags,omitempty"`
+	Name  string        `json:"coursename"`
+	Error ErrorResponse `json:"error"`
 }
 
 func main() {
@@ -20,20 +19,20 @@ func main() {
 
 }
 
-func EncodeJson() {
-	lcoCourse := []course{
-		{"ReactJS Bootcamp", 299, "LearnCodeOnline.in", "abc123", []string{"web-dev", "js"}},
-		{"Angular", 229, "Udemy", "xyz123", []string{"web-dev", "js"}},
-		{"Mernstack", 222, "Udemy", "pqr123", nil},
-	}
-	//package this data as JSON data
+// func EncodeJson() {
+// 	lcoCourse := []course{
+// 		{"ReactJS Bootcamp", 299, "LearnCodeOnline.in", "abc123", []string{"web-dev", "js"},
+// 			ErrorResponse{"code": 404,
+// 				"message": "Course not found"}}}
 
-	finalJson, err := json.MarshalIndent(lcoCourse, "", "\t")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("%s\n", finalJson)
-}
+// 	//package this data as JSON data
+
+// 	finalJson, err := json.MarshalIndent(lcoCourse, "", "\t")
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	fmt.Printf("%s\n", finalJson)
+// }
 
 func DecodeJson() {
 	jsonDataFromWeb := []byte(`
@@ -41,7 +40,11 @@ func DecodeJson() {
 		"coursename": "ReactJS Bootcamp",
 		"Price": 299,
 		"website": "LearnCodeOnline.in",
-		"tags": ["web-dev","js"]
+		"tags": ["web-dev","js"],
+		"error": {
+			"code": 404,
+			"message": "Course not found"
+		}
 	}
 	`)
 	var lcoCourse course
@@ -62,4 +65,6 @@ func DecodeJson() {
 	for k, v := range myOnlineData {
 		fmt.Printf("Key is %v and value is %v and type is %T\n", k, v, v)
 	}
+	fmt.Println("-----------------------------------------")
+	fmt.Printf("%v", myOnlineData["error"].(map[string]interface{})["message"])
 }
